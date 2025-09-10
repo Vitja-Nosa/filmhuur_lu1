@@ -7,7 +7,7 @@ const customerDao = {
             customerId == undefined
                 ? `SELECT * FROM ??`
                 : `SELECT * FROM ?? WHERE ?? = ?`,
-            customerId == undefined ? ['customer'] : ['customer', 'customer_id', userId],
+            customerId == undefined ? ['customer'] : ['customer', 'customer_id', customerId],
             (error, results) => {
                 if (error) return callback(error, undefined);
                 console.log(results);
