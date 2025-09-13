@@ -9,7 +9,8 @@ block content
       li(class="list-group-item")= 'First Name: ' + customer.first_name
       li(class="list-group-item")= 'Last Name: ' + customer.last_name
       li(class="list-group-item")= 'Email: ' + customer.email
-      li(class="list-group-item")= 'address_id: ' + customer.address_id
-      li(class="list-group-item")= 'active: ' + customer.active
+      li(class="list-group-item")= 'Address: ' + customer.address
+      li(class="list-group-item")= 'Phone: ' + customer.phone
+      li(class="list-group-item")= 'Active: ' + (customer.active == 1 ? 'Yes' : 'No')
       li(class="list-group-item")= 'Created at: ' + customer.create_date
         

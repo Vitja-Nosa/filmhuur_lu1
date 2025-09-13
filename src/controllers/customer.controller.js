@@ -27,6 +27,7 @@ const customerController = {
             })
         } else if (req.method == "POST") {
             let { first_name, last_name, email, active } = req.body
+            customerService
         }
     }
 

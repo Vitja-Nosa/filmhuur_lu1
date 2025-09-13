@@ -3,13 +3,13 @@ const { expect } = require('chai')
 
 const customerService = {
     validate: (req, customerId) => {
-        // { }
-        // try {
-        //     expect()
-        // }
-        // catch (error) {
-        //     throw error
-        // }
+        try {
+
+            expect(req)
+        }
+        catch (error) {
+            console.log(error);
+        }
     },
 
     get: (customerId, callback) => {
