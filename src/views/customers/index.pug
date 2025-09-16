@@ -1,5 +1,8 @@
 extends ../layout
 
+block header
+  include ../header
+
 block content
   table(class="table")
    thead
@@ -19,4 +22,4 @@ block content
         td
           a(class="btn btn-primary mx-1" href="/customers/"+customer.customer_id) Detail
           a(class="btn btn-primary mx-1" href="/customers/edit/"+customer.customer_id) Edit
-          a(class="btn btn-danger mx-1") Delete
+          a(class="btn btn-danger mx-1" href="javascript:void(0);" onclick=`deleteButtonClicked(${customer.customer_id}, this)`) Delete

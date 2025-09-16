@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+  .position-absolute.top-50.start-50.translate-middle(style="width:100%;max-width:400px;")
+    h2.mb-4.text-center Login
+    form(method="post" action="/auth/login")
+      .form-group.my-2
+        label(for="email") Email
+        input#email.form-control(type="email", name="email", required, placeholder="Enter your email")
+      .form-group.my-2
+        label(for="password") Password
+        input#password.form-control(type="password", name="password", required, placeholder="Enter your password")
+      button.btn.btn-primary.my-2.w-100(type="submit") Login

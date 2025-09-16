@@ -17,9 +17,9 @@ const customerDao = {
         );
     },
 
-    update: (customerId, data) => {
+    update: (customerId, first_name, last_name, email, active, address, phone, callback) => {
         database.query(
-            ` UPDATE ?? INNER JOIN ?? ON ??.?? = ??.??
+            `UPDATE ?? INNER JOIN ?? ON ??.?? = ??.??
             SET ??.?? = ?, 
                 ??.?? = ?, 
                 ??.?? = ?, 
@@ -32,15 +32,30 @@ const customerDao = {
                 'customer', 'address_id',
                 'address', 'address_id',
 
-                'customer', 'first_name', data.first_name,
-                'customer', 'last_name', data.last_name,
-                'customer', 'email', data.email,
-                'customer', 'active', data.active,
-                'address', 'address', data.address,
-                'address', 'phone', data.phone,
+                'customer', 'first_name', first_name,
+                'customer', 'last_name', last_name,
+                'customer', 'email', email,
+                'customer', 'active', active,
+                'address', 'address', address,
+                'address', 'phone', phone,
 
-                'customer', 'id', data.customerId
-            ]
+                'customer', 'customer_id', customerId
+            ],
+            (error, results) => {
+                if (error) return callback(error, undefined);
+                if (results) return callback(undefined, results)
+            }
+        )
+    },
+
+    delete: (customerId, callback) => {
+        database.query(
+            "DELETE FROM ?? WHERE ?? = ?",
+            ["customer", "customer_id", customerId],
+            (error, results) => {
+                if (error) return callback(error, undefined)
+                if (results) return callback(undefined, results)
+            }
         )
     }
 }

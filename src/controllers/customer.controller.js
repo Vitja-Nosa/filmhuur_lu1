@@ -21,14 +21,35 @@ const customerController = {
         if (req.method == 'GET') {
             customerService.get(customerId, (error, customers) => {
                 if (error) next(error);
-                if (customers && customerId !== undefined) {
+                if (customers) {
                     res.render('customers/edit', { customer: customers[0] });
                 }
             })
         } else if (req.method == "POST") {
-            let { first_name, last_name, email, active } = req.body
-            customerService
+            let { first_name, last_name, email, active, address, phone } = req.body
+            customerService.update(customerId, first_name, last_name, email, active, address, phone, (error, results) => {
+                if (error) {
+                    next(error);
+                };
+                if (results) {
+                    res.redirect('/customers');
+                }
+            })
         }
+    },
+
+    delete: (req, res, next) => {
+        let customerId = req.params.customerId;
+        customerService.delete(customerId, (error, results) => {
+            if (error) {
+                console.log(error)
+            }
+            if (results) {
+                res.json({
+                    status: 200,
+                })
+            }
+        })
     }
 
 }
