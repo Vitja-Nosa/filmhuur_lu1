@@ -1,7 +1,7 @@
 const database = require('../db/sql/connection')
 
 const addressDao = {
-    create: (address, district, city_id, postal_code, phone, location, callback) => {
+    create: (address, district, city_id, postal_code, phone, callback) => {
         database.query(
             "INSERT INTO ?? (??, ??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?, ST_GeomFromText(?))",
             [

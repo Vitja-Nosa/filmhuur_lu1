@@ -9,7 +9,7 @@ router.get('/', authController.isLoggedIn, customerController.get);
 router.get('/:customerId', authController.isLoggedIn, customerController.get);
 
 router.get('/create', authController.isLoggedIn, customerController.create);
-router.post('/create', customerController.create);
+router.post('/create', authController.isLoggedIn, customerController.create);
 
 router.get('/edit/:customerId', authController.isLoggedIn, customerController.edit);
 router.post('/edit/:customerId', authController.isLoggedIn, customerController.edit);

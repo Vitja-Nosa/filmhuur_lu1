@@ -4,20 +4,19 @@ const addressDao = require("../dao/address.dao")
 const { expect } = require('chai')
 
 const customerService = {
-    create: (store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone, location, callback) => {
+    create: (store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone, callback) => {
         active = active == 'on' ? 1 : 0;
         var address_id = undefined;
-        addressDao.create(address, district, city_id, postal_code, phone, location, (error, result) => {
+        addressDao.create(address, district, city_id, postal_code, phone, (error, result) => {
             if (error) return callback(error, undefined)
             if (result) {
                 address_id = result.insertId
+                customerDao.create(store_id, first_name, last_name, email, address_id, active, (error, results) => {
+                    if (error) return callback(error, undefined);
+                    if (results) return callback(undefined, results)
+                });
             }
         })
-        if (address_id) {
-            customerDao.create(store_id, first_name, last_name, email, active, address_id, (error, results) => {
-                if (error) return callback(error, undefined);
-            });
-        }
     },
 
     get: (customerId, callback) => {
