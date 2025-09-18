@@ -2,6 +2,17 @@ const data = require('../db/sql/example.data');
 const database = require('../db/sql/connection')
 
 const customerDao = {
+    create: (store_id, first_name, last_name, email, active, callback) => {
+        database.query(
+            "INSERT INTO ?? (??, ??, ??, ??, ??) VALUES (?, ?, ?, ?, ?)",
+            ["customer", "first_name", "last_name", "email", "active", first_name, last_name, email, active],
+            (error, results) => {
+                if (error) return callback(error, undefined)
+                if (results) return callback(undefined, results)
+            }
+        )
+    },
+
     get: (customerId, callback) => {
         database.query(
             customerId == undefined

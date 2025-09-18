@@ -1,6 +1,23 @@
 const customerService = require("../services/customer.service")
 
 const customerController = {
+    create: (req, res, next) => {
+        if (req.method == 'GET') {
+            res.reder('customers/create')
+        } else if (req.method == 'POST') {
+            let { first_name, last_name, email, active, address, district, city_id, postal_code, phone, location } = req.body
+            console.log("address is: " + address);
+            customerService.create(store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone, location,
+                (error, results) => {
+                    if (error) next(error)
+                    if (results) {
+                        console.log('customer created')
+                        res.redirect('/customers');
+                    }
+                })
+        }
+    },
+
     get: (req, res, next) => {
         let customerId = req.params.customerId;
         customerService.get(customerId, (error, customers) => {

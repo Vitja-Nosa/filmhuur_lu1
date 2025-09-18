@@ -1,0 +1,29 @@
+extends ../layout
+
+block header
+  include ../header
+
+block content
+  div(class="card")
+    div(class="card-header") Edit Page
+    form(method="POST" action="/customers/edit/3")
+        div(class="card-body")
+            div(class="form-group my-4")
+                label(for="first_name") First name
+                input(name='first_name' class="form-control" id="first_name" type="text" value="" placeholder="first name")
+            div(class="form-group my-4")
+                label(for="last_name") Last name
+                input(name='last_name' class="form-control" id="last_name" type="text" value="" placeholder="last name")
+            div(class="form-group my-4")
+                label(for="email") Email
+                input(name='email' class="form-control" id="email" type="email" value="" placeholder="email")
+            div(class="form-group my-4")
+                label(for="address") Address
+                input(name='address' class="form-control" id="address" type="text" value="" placeholder="address")
+            div(class="form-group my-4")
+                label(for="phone") Phone number
+                input(name='phone' class="form-control" id="phone" type="tel" value="" placeholder="phone number")
+            div(class="form-check form-switch my-4")
+                label(for="active" class="") Active
+                input(name='active' class="form-check-input" id="active" type="checkbox" checked="true" placeholder="email")
+            button(class="btn btn-primary") Submit

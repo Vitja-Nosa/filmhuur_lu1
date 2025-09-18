@@ -26,7 +26,7 @@ const authController = {
         if (req.session.user) {
             return next()
         }
-        const error = new Error('You must logged in');
+        const error = new Error('You must be logged in');
         next(error);
 
     },
