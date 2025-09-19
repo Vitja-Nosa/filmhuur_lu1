@@ -1,6 +1,8 @@
 const customerService = require("../services/customer.service")
 const cityService = require("../services/city.service")
 const storeService = require("../services/store.service")
+const paymentService = require("../services/payment.service");
+const rentalService = require("../services/rental.service");
 
 const customerController = {
     create: (req, res, next) => {
@@ -66,16 +68,18 @@ const customerController = {
 
     delete: (req, res, next) => {
         let customerId = req.params.customerId;
-        customerService.delete(customerId, (error, results) => {
-            if (error) {
-                console.log(error)
-            }
-            if (results) {
-                res.json({
-                    status: 200,
-                })
-            }
-        })
+        paymentService.delete(customerId, (error, results) => {
+            if (error) return next(error);
+            rentalService.delete(customerId, (error, results) => {
+                if (error) return next(error);
+                customerService.delete(customerId, (error, results) => {
+                    if (error) return next(error);
+                    if (results) {
+                        res.redirect('/customers');
+                    }
+                });
+            });
+        });
     }
 
 }
