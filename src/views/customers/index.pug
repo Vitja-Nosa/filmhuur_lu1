@@ -4,22 +4,39 @@ block header
   include ../header
 
 block content
-  table(class="table")
-   thead
-    tr
-      th id
-      th first name
-      th last name
-      th active
-      th &nbsp;
-   tbody
-    each customer in customers
-      tr
-        td= customer.customer_id
-        td= customer.first_name
-        td= customer.last_name
-        td= customer.active
-        td
-          a(class="btn btn-primary mx-1" href="/customers/"+customer.customer_id) Detail
-          a(class="btn btn-primary mx-1" href="/customers/edit/"+customer.customer_id) Edit
-          a(class="btn btn-danger mx-1" href="javascript:void(0);" onclick=`deleteButtonClicked(${customer.customer_id}, this)`) Delete
+  .card.shadow-sm
+    .card-header.bg-white.d-flex.justify-content-between.align-items-center
+      h5.mb-0 Customers
+      a.btn.btn-success(href="/customers/create")
+        i.bi.bi-plus-circle.me-1
+        | Create Customer
+    .card-body.p-0
+      table.table.table-hover.table-striped.mb-0
+        thead.table-light
+          tr
+            th(scope="col") ID
+            th(scope="col") First Name
+            th(scope="col") Last Name
+            th(scope="col") Active
+            th(scope="col" class="text-end") Actions
+        tbody
+          each customer in customers
+            tr
+              td= customer.customer_id
+              td= customer.first_name
+              td= customer.last_name
+              td
+                if customer.active
+                  span.badge.bg-success Active
+                else
+                  span.badge.bg-secondary Inactive
+              td.text-end
+                a.btn.btn-outline-primary.btn-sm.mx-1(href="/customers/"+customer.customer_id)
+                  i.bi.bi-eye.me-1
+                  | Detail
+                a.btn.btn-outline-secondary.btn-sm.mx-1(href="/customers/edit/"+customer.customer_id)
+                  i.bi.bi-pencil.me-1
+                  | Edit
+                a.btn.btn-outline-danger.btn-sm.mx-1(href="javascript:void(0);" onclick=`deleteButtonClicked(${customer.customer_id}, this)`)
+                  i.bi.bi-trash.me-1
+                  | Delete

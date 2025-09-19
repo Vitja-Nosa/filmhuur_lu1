@@ -1,17 +1,26 @@
 const customerService = require("../services/customer.service")
+const cityService = require("../services/city.service")
+const storeService = require("../services/store.service")
 
 const customerController = {
     create: (req, res, next) => {
         console.log("testing");
         if (req.method == 'GET') {
-            res.render('customers/create')
+            cityService.get((error, cities) => {
+                if (error) next(error)
+                if (cities) {
+                    storeService.get((error, stores) => {
+                        if (error) next(error)
+                        if (stores) res.render('customers/create', { cities: cities, stores: stores })
+                    })
+                }
+            })
         } else if (req.method == 'POST') {
             let { store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone } = req.body
             customerService.create(store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone,
                 (error, results) => {
                     if (error) next(error)
                     if (results) {
-                        console.log('customer created')
                         res.redirect('/customers');
                     }
                 })
