@@ -4,26 +4,51 @@ block header
   include ../header
 
 block content
-  div(class="card")
-    div(class="card-header") Edit Page
-    form(method="POST" action="/customers/edit/3")
-        div(class="card-body")
-            div(class="form-group my-4")
-                label(for="first_name") First name
-                input(name='first_name' class="form-control" id="first_name" type="text" value="" placeholder="first name")
-            div(class="form-group my-4")
-                label(for="last_name") Last name
-                input(name='last_name' class="form-control" id="last_name" type="text" value="" placeholder="last name")
-            div(class="form-group my-4")
-                label(for="email") Email
-                input(name='email' class="form-control" id="email" type="email" value="" placeholder="email")
-            div(class="form-group my-4")
-                label(for="address") Address
-                input(name='address' class="form-control" id="address" type="text" value="" placeholder="address")
-            div(class="form-group my-4")
-                label(for="phone") Phone number
-                input(name='phone' class="form-control" id="phone" type="tel" value="" placeholder="phone number")
-            div(class="form-check form-switch my-4")
-                label(for="active" class="") Active
-                input(name='active' class="form-check-input" id="active" type="checkbox" checked="true" placeholder="email")
-            button(class="btn btn-primary") Submit
+  .card.shadow
+    .card-header.bg-primary.text-white
+      h4.mb-0 Create New Customer
+    form(method="POST" action="/customers/create" autocomplete="off")
+      .card-body
+        p.text-muted.mb-4 Please fill in the details below to add a new customer.
+        .row
+          .col-md-6
+            .form-group.mb-3
+              label(for="first_name") First Name
+              input#first_name.form-control(type="text", name="first_name", placeholder="Enter first name", required, autofocus)
+            .form-group.mb-3
+              label(for="last_name") Last Name
+              input#last_name.form-control(type="text", name="last_name", placeholder="Enter last name", required)
+            .form-group.mb-3
+              label(for="email") Email
+              input#email.form-control(type="email", name="email", placeholder="Enter email", required)
+            .form-group.mb-3
+              label(for="store_id") Store
+              select#city_id.form-select(name="store_id" required)
+                option(value="" disabled selected) Select a store id
+                each store in stores
+                  option(value=store.store_id)= store.store_id
+            .form-check.form-switch.mb-3
+              input#active.form-check-input(type="checkbox", name="active", checked)
+              label.form-check-label(for="active") Active
+          .col-md-6
+            .form-group.mb-3
+              label(for="address") Address
+              input#address.form-control(type="text", name="address", placeholder="Enter address", required)
+            .form-group.mb-3
+              label(for="phone") Phone Number
+              input#phone.form-control(type="tel", name="phone", placeholder="Enter phone number", required)
+            .form-group.mb-3
+              label(for="district") District
+              input#district.form-control(type="text", name="district", placeholder="Enter district", required)
+            .form-group.mb-3
+              label(for="city_id") City
+              select#city_id.form-select(name="city_id" required)
+                option(value="" disabled selected) Select a city
+                each city in cities
+                  option(value=city.city_id)= city.city
+            .form-group.mb-3
+              label(for="postal_code") Postal Code
+              input#postal_code.form-control(type="text", name="postal_code", placeholder="Enter postal code", required)
+      .card-footer.bg-light
+        button.btn.btn-primary(type="submit") Create Customer
+        a.btn.btn-secondary.ms-2(href="/customers") Cancel

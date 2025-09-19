@@ -26,8 +26,9 @@ const authController = {
         if (req.session.user) {
             return next()
         }
-        const error = new Error('You must be logged in');
-        next(error);
+        return res.redirect("/auth/login");
+        // const error = new Error('You must be logged in');
+        // next(error);
 
     },
 
