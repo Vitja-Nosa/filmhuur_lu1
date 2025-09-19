@@ -2,10 +2,10 @@ const customerService = require("../services/customer.service")
 
 const customerController = {
     create: (req, res, next) => {
+        console.log("testing");
         if (req.method == 'GET') {
             res.render('customers/create')
         } else if (req.method == 'POST') {
-            console.log("customer controller")
             let { store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone } = req.body
             customerService.create(store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone,
                 (error, results) => {
