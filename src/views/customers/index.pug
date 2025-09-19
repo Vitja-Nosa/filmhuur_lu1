@@ -37,6 +37,7 @@ block content
                 a.btn.btn-outline-secondary.btn-sm.mx-1(href="/customers/edit/"+customer.customer_id)
                   i.bi.bi-pencil.me-1
                   | Edit
-                a.btn.btn-outline-danger.btn-sm.mx-1(href="javascript:void(0);" onclick=`deleteButtonClicked(${customer.customer_id}, this)`)
-                  i.bi.bi-trash.me-1
-                  | Delete
+                form.d-inline(method="POST", action=`/customers/delete/${customer.customer_id}`)
+                  button.btn.btn-outline-danger.btn-sm.mx-1(type="submit" onclick="return confirm('Are you sure you want to delete this customer?');")
+                    i.bi.bi-trash.me-1
+                    | Delete

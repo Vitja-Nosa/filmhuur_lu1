@@ -16,6 +16,6 @@ router.post('/edit/:customerId', authController.isLoggedIn, customerController.e
 
 router.get('/:customerId', authController.isLoggedIn, customerController.get);
 
-router.delete('/delete/:customerId', authController.isLoggedIn, customerController.delete);
+router.post('/delete/:customerId', authController.isLoggedIn, customerController.delete);
 
 module.exports = router;
