@@ -16,7 +16,7 @@ const customerDao = {
     get: (customerId, callback) => {
         database.query(
             customerId == undefined
-                ? `SELECT * FROM ??`
+                ? `SELECT * FROM ?? ORDER BY create_date DESC;`
                 : `SELECT * FROM ?? INNER JOIN address ON customer.address_id = address.address_id WHERE ?? = ?`, //TODO: moet ik hier ook vragentekens neer zetten voor join
             customerId == undefined ? ['customer'] : ['customer', 'customer_id', customerId],
             (error, results) => {
