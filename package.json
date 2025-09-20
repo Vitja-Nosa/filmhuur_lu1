@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "start-server": "npm start",
+    "test": "mocha e2e-spec.js",
+    "ci": "start-server-and-test start-server http://localhost:8080 test",
+    "cy:run": "start-server-and-test start http://localhost:3000 cypress:run",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -19,12 +25,15 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-session": "^1.18.2",
+    "express-validator": "^7.2.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^3.14.4",
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
-    "prettier": "^3.6.2"
+    "cypress": "^15.2.0",
+    "prettier": "^3.6.2",
+    "start-server-and-test": "^2.1.2"
   }
 }
