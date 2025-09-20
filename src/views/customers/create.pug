@@ -9,6 +9,8 @@ block content
       h4.mb-0 Create New Customer
     form(method="POST" action="/customers/create" autocomplete="off")
       .card-body
+        if error && error.length
+            .alert.alert-danger= error[0]
         p.text-muted.mb-4 Please fill in the details below to add a new customer.
         .row
           .col-md-6
