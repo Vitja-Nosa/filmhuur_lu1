@@ -3,6 +3,8 @@ extends ../layout
 block content
   .position-absolute.top-50.start-50.translate-middle(style="width:100%;max-width:400px;")
     h2.mb-4.text-center Login
+    if error && error.length
+      .alert.alert-danger= error[0]
     form(method="post" action="/auth/login")
       .form-group.my-2
         label(for="email") Email

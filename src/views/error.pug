@@ -1,6 +1,10 @@
 extends layout
 
+block header
+  include header
+
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .d-flex.justify-content-center.align-items-center.bg-white(style="min-height: 100vh;")
+    .text-center
+      h1.display-1.text-danger #{error.status || 500}
+      h2.text-dark.mt-3 #{message}

@@ -9,7 +9,8 @@ block content
       h4.mb-0 Edit Customer
     form(method="POST" action="/customers/edit/" + customer.customer_id autocomplete="off")
       .card-body
-        .alert.alert-danger= error
+        if error && error.length
+          .alert.alert-danger= error[0]
         p.text-muted.mb-4 Please update the details below to edit the customer.
         .row
           .col-md-6

@@ -6,14 +6,18 @@ const authController = {
         if (req.method == "POST") {
             let { email, password } = req.body;
             authService.login(email, password, (error, user) => {
-                if (error) return next(error);
+                if (error) {
+                    req.flash('error', "Invalid email or password.");
+                    console.log("error");
+                    res.redirect("back");
+                };
                 if (user) {
                     req.session.user = user;
                     res.redirect("/customers");
                 }
             })
         } else if (req.method == "GET") {
-            res.render("auth/login")
+            res.render("auth/login", { error: req.flash("error") })
         }
     },
     logout: (req, res, next) => {
@@ -27,8 +31,6 @@ const authController = {
             return next()
         }
         return res.redirect("/auth/login");
-        // const error = new Error('You must be logged in');
-        // next(error);
 
     },
 
