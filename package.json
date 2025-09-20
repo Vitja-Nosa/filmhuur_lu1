@@ -7,7 +7,7 @@
     "start-server": "npm start",
     "test": "mocha e2e-spec.js",
     "ci": "start-server-and-test start-server http://localhost:8080 test",
-    "cy:run": "start-server-and-test start http://localhost:3000 cypress:run",
+    "cy:run": "start-server-and-test start http://localhost:8080 cypress:run",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
   },
