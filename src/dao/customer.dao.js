@@ -17,7 +17,7 @@ const customerDao = {
         database.query(
             customerId == undefined
                 ? `SELECT * FROM ?? ORDER BY create_date DESC;`
-                : `SELECT * FROM ?? INNER JOIN address ON customer.address_id = address.address_id WHERE ?? = ?`, //TODO: moet ik hier ook vragentekens neer zetten voor join
+                : `SELECT * FROM ?? INNER JOIN address ON customer.address_id = address.address_id WHERE ?? = ?`,
             customerId == undefined ? ['customer'] : ['customer', 'customer_id', customerId],
             (error, results) => {
                 if (error) return callback(error, undefined);
@@ -28,7 +28,7 @@ const customerDao = {
         );
     },
 
-    update: (customerId, first_name, last_name, email, active, address, phone, callback) => {
+    update: (customerId, first_name, last_name, email, active, address, district, city_id, postal_code, phone, callback) => {
         database.query(
             `UPDATE ?? INNER JOIN ?? ON ??.?? = ??.??
             SET ??.?? = ?, 
@@ -36,6 +36,9 @@ const customerDao = {
                 ??.?? = ?, 
                 ??.?? = ?, 
                 ??.?? = ?, 
+                ??.?? = ?,
+                ??.?? = ?,
+                ??.?? = ?,
                 ??.?? = ?
             WHERE ??.?? = ?`,
             [
@@ -48,6 +51,9 @@ const customerDao = {
                 'customer', 'email', email,
                 'customer', 'active', active,
                 'address', 'address', address,
+                'address', 'district', district,
+                'address', 'city_id', city_id,
+                'address', 'postal_code', postal_code,
                 'address', 'phone', phone,
 
                 'customer', 'customer_id', customerId

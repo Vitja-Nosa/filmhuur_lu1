@@ -4,26 +4,52 @@ block header
   include ../header
 
 block content
-  div(class="card")
-    div(class="card-header") Edit Page
-    form(method="POST" action="/customers/edit/3")
-        div(class="card-body")
-            div(class="form-group my-4")
-                label(for="first_name") First name
-                input(name='first_name' class="form-control" id="first_name" type="text" value=customer.first_name placeholder="first name")
-            div(class="form-group my-4")
-                label(for="last_name") Last name
-                input(name='last_name' class="form-control" id="last_name" type="text" value=customer.last_name placeholder="last name")
-            div(class="form-group my-4")
-                label(for="email") Email
-                input(name='email' class="form-control" id="email" type="email" value=customer.email placeholder="email")
-            div(class="form-group my-4")
-                label(for="address") Address
-                input(name='address' class="form-control" id="address" type="text" value=customer.address placeholder="address")
-            div(class="form-group my-4")
-                label(for="phone") Phone number
-                input(name='phone' class="form-control" id="phone" type="tel" value=customer.phone placeholder="phone number")
-            div(class="form-check form-switch my-4")
-                label(for="active" class="") Active
-                input(name='active' class="form-check-input" id="active" type="checkbox" checked=customer.active == 1 placeholder="email")
-            button(class="btn btn-primary") Submit
+  .card.shadow
+    .card-header.bg-primary.text-white
+      h4.mb-0 Edit Customer
+    form(method="POST" action="/customers/edit/" + customer.customer_id autocomplete="off")
+      .card-body
+        .alert.alert-danger= error
+        p.text-muted.mb-4 Please update the details below to edit the customer.
+        .row
+          .col-md-6
+            .form-group.mb-3
+              label(for="first_name") First Name
+              input#first_name.form-control(type="text", name="first_name", placeholder="Enter first name", required, autofocus, value=customer.first_name)
+            .form-group.mb-3
+              label(for="last_name") Last Name
+              input#last_name.form-control(type="text", name="last_name", placeholder="Enter last name", required, value=customer.last_name)
+            .form-group.mb-3
+              label(for="email") Email
+              input#email.form-control(type="email", name="email", placeholder="Enter email", required, value=customer.email)
+            .form-group.mb-3
+              label(for="store_id") Store
+              select#store_id.form-select(name="store_id" required)
+                option(value="" disabled selected) Select a store id
+                each store in stores
+                  option(value=store.store_id selected=store.store_id==customer.store_id)= store.store_id
+            .form-check.form-switch.mb-3
+              input#active.form-check-input(type="checkbox", name="active", checked=customer.active == 1)
+              label.form-check-label(for="active") Active
+          .col-md-6
+            .form-group.mb-3
+              label(for="address") Address
+              input#address.form-control(type="text", name="address", placeholder="Enter address", required, value=customer.address)
+            .form-group.mb-3
+              label(for="phone") Phone Number
+              input#phone.form-control(type="tel", name="phone", placeholder="Enter phone number", required, value=customer.phone)
+            .form-group.mb-3
+              label(for="district") District
+              input#district.form-control(type="text", name="district", placeholder="Enter district", required, value=customer.district)
+            .form-group.mb-3
+              label(for="city_id") City
+              select#city_id.form-select(name="city_id" required)
+                option(value="" disabled selected) Select a city
+                each city in cities
+                  option(value=city.city_id selected=city.city_id==customer.city_id)= city.city
+            .form-group.mb-3
+              label(for="postal_code") Postal Code
+              input#postal_code.form-control(type="text", name="postal_code", placeholder="Enter postal code", required, value=customer.postal_code)
+      .card-footer.bg-light
+        button.btn.btn-primary(type="submit") Save Changes
+        a.btn.btn-secondary.ms-2(href="/customers") Cancel

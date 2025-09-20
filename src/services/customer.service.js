@@ -1,7 +1,6 @@
 const customerDao = require("../dao/customer.dao")
 const addressDao = require("../dao/address.dao")
 
-const { expect } = require('chai')
 
 const customerService = {
     create: (store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone, callback) => {
@@ -26,9 +25,9 @@ const customerService = {
         })
     },
 
-    update: (customerId, first_name, last_name, email, active, address, phone, callback) => {
+    update: (customerId, store_id, first_name, last_name, email, active, address, district, city_id, postal_code, phone, callback) => {
         active = active == 'on' ? 1 : 0;
-        customerDao.update(customerId, first_name, last_name, email, active, address, phone, (error, results) => {
+        customerDao.update(customerId, first_name, last_name, email, active, address, district, city_id, postal_code, phone, (error, results) => {
             if (error) return callback(error, undefined);
             if (results) return callback(undefined, results)
         })
