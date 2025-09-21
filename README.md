@@ -63,6 +63,13 @@ Non-functionele eisen:
 
 ---
 
+## Hosting
+
+- De server draait op **Microsoft Azure**  
+- Continuous Deployment is ingesteld via GitHub Actions  
+
+---
+
 ## Auteur
 
 Vitja Nosa
